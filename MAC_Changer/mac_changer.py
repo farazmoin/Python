@@ -5,7 +5,12 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--interface', dest='interface', help='Interface to change the MAC of')
     parser.add_argument('-m', '--newMac', dest='new_mac', help='New MAC address')
-    return vars(parser.parse_args())
+    args = vars(parser.parse_args())
+    if not args['interface']:
+        parser.error('Did you specify an interface?')
+    elif not args['new_mac']:
+        parser.error('Did you specify a MAC')
+    return args
 
 ### Secure ###
 def mac_changer(interface, new_mac):
@@ -26,5 +31,5 @@ def mac_changer(interface, new_mac):
 # interface = input('Enter the interface name: ')
 # new_mac = input('Enter the new MAC address: ')
 
-args = get_args()
-mac_changer(args['interface'], args['new_mac'])
+argument = get_args()
+mac_changer(argument['interface'], argument['new_mac'])

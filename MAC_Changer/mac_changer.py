@@ -1,5 +1,6 @@
 import subprocess
 import argparse
+import re
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -31,5 +32,9 @@ def mac_changer(interface, new_mac):
 # interface = input('Enter the interface name: ')
 # new_mac = input('Enter the new MAC address: ')
 
-argument = get_args()
-mac_changer(argument['interface'], argument['new_mac'])
+args = get_args()
+# mac_changer(args['interface'], args['new_mac'])
+
+ifconfig_result = subprocess.check_output(['ifconfig', args['interface']]).decode()
+filtered_ifconfig_result = re.findall('\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
+print(filtered_ifconfig_result)

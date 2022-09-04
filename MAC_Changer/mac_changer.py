@@ -21,6 +21,14 @@ def mac_changer(interface, new_mac):
     subprocess.call(['ifconfig', interface, 'hw', 'ether', new_mac])
     subprocess.call(['ifconfig', interface, 'up'])
 
+def current_mac():
+    ifconfig_result = subprocess.check_output(['ifconfig', args['interface']]).decode()
+    filtered_ifconfig_result = re.findall('\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
+    if filtered_ifconfig_result:
+        return filtered_ifconfig_result[0]
+    else:
+        print('Could not read MAC address')
+
 ### Insecure ###
 
 # subprocess.call(f'ifconfig {interface} down', shell=True)
@@ -33,8 +41,11 @@ def mac_changer(interface, new_mac):
 # new_mac = input('Enter the new MAC address: ')
 
 args = get_args()
-# mac_changer(args['interface'], args['new_mac'])
-
-ifconfig_result = subprocess.check_output(['ifconfig', args['interface']]).decode()
-filtered_ifconfig_result = re.findall('\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
-print(filtered_ifconfig_result)
+currentMac = current_mac()
+print('Current MAC is > ', currentMac)
+mac_changer(args['interface'], args['new_mac'])
+currentMac = current_mac()
+if currentMac == args['new_mac']:
+    print('Changed MAC to ', currentMac)
+else:
+    print('Failed to change MAC')

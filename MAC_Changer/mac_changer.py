@@ -11,7 +11,7 @@ def get_args():
     if not args['interface']:
         parser.error('Did you specify an interface?')
     elif not args['new_mac']:
-        parser.error('Did you specify a MAC')
+        parser.error('Did you specify a MAC?')
     return args
 
 # Secure #

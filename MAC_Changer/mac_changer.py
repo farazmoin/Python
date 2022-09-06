@@ -1,13 +1,6 @@
 import argparse
 import subprocess
 import re
-interfaceLst = list()
-ifconfig_output = subprocess.check_output(['ifconfig']).decode()
-interface = re.findall('.+: ', ifconfig_output)
-mac = re.findall('\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_output)
-for i in interface:
-    interfaceLst.append(i.rstrip(': '))
-print('Interface > ', interfaceLst, 'MAC', mac)
 
 
 def get_args():
@@ -15,7 +8,7 @@ def get_args():
     parser.add_argument('-i', '--interface', dest='interface', help='Interface to change the MAC of')
     parser.add_argument('-m', '--newMac', dest='new_mac', help='New MAC address')
     args = vars(parser.parse_args())
-    if not args['interface'] or args['interface'] not in interfaceLst:
+    if not args['interface']:
         parser.error('Did you specify a valid interface?')
     elif not args['new_mac']:
         parser.error('Did you specify a MAC?')

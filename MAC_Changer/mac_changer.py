@@ -47,7 +47,7 @@ def current_mac():
 
 args = get_args()
 currentMac = current_mac()
-print('Current MAC is > ', currentMac)
+print('Current MAC is ', currentMac)
 mac_changer(args['interface'], args['new_mac'])
 currentMac = current_mac()
 if currentMac == args['new_mac']:

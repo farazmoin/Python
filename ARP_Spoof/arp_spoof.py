@@ -35,4 +35,4 @@ try:
         print(f'\r[+] Packets sent: {count}', end='')
         time.sleep(2)
 except KeyboardInterrupt:
-    print('CTRL + C Detected. Quitting Now.')
+    print('\nCTRL + C Detected. Quitting Now.')

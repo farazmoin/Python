@@ -57,7 +57,7 @@ for comment in reddit.subreddit("cryptocurrency+xrp+bitcoin").stream.comments():
     if sentiment.polarity != 0.0:
         sentimentLst.append(sentiment.polarity)
 
-        print('Total Sentiment is: |||||| ', round(average(sentimentLst)))
+        print('Total Sentiment is: |||||| ', average(sentimentLst))
 
         if len(sentimentLst) > neededSentiment and average(sentimentLst) > 0.50:
             print('Buy Detected based on sentiment analysis')

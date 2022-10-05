@@ -11,10 +11,13 @@ name2 = name2.lower()
 
 name3 = name1 + name2
 
+# Counting the occurrence of each letter in word TRUE in both the names
 total_true = name3.count('t') + name3.count('r') + name3.count('u') + name3.count('e')
 
+# # Counting the occurrence of each letter in word LOVE in both the names
 total_love = name3.count('l') + name3.count('o') + name3.count('v') + name3.count('e')
 
+# Adding 
 total_combined = str(total_true) + str(total_love)
 
 if int(total_combined) < 10 or int(total_combined) > 90:
